@@ -16,11 +16,16 @@ const port = 8000;
 
 const api = express();
 
+
 const data = require('./../Data/data.json');
+const path = require('path');
+const DIR_DIST = path.join(__dirname, '../dist');
+const HTML_STATIC = path.join(DIR_DIST, 'index.html');
 api.use(express.json());
 api.use(express.urlencoded({extended:false}));
+api.use(express.static(DIR_DIST));
 api.get('/', function(request,response){ //similar to request mapping
-	res.send("Hello from Skillsoft express");
+	res.sendFile(HTML_STATIC);
 });
 
 api.get('/getemployees', function(request, response){
